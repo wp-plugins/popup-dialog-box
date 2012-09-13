@@ -49,7 +49,7 @@ A popup dialog box is used to display any content inside a popup within a webpag
 
 = 2. The Popup Dialog Box plugin is not working properly =
 
-Please check the wordpress version you are using. Make sure it meets the minimum version recommended by us. Make sure all files of the `Popup Dialog Box` plugin uploaded to the folder `wp-content/plugins/`
+Please check the wordpress version you are using. Make sure it meets the minimum version recommended by us. Make sure all files of the `Popup Dialog Box` plugin are uploaded to the folder `wp-content/plugins/`
 
 = 3. Can I use this plugin with other popup plugins ? =
 
