@@ -32,7 +32,13 @@ Check out the [premium version](http://xyzscripts.com/wordpress-plugins/xyz-wp-p
 
 Popup Dialog Box is developed and maintained by [XYZScripts](http://xyzscripts.com/ "xyzscripts.com"). For any support, you may [contact us](http://xyzscripts.com/support/ "XYZScripts Support").
 
+★ [Popup Dialog Box User Guide](http://docs.xyzscripts.com/wordpress-plugins/popup-dialog-box/ "Popup Dialog Box User Guide")
+★ [Popup Dialog Box FAQ](http://kb.xyzscripts.com/wordpress-plugins/popup-dialog-box/ "Popup Dialog Box FAQ")
+
 == Installation ==
+
+★ [Popup Dialog Box User Guide](http://docs.xyzscripts.com/wordpress-plugins/popup-dialog-box/ "Popup Dialog Box User Guide")
+★ [Popup Dialog Box FAQ](http://kb.xyzscripts.com/wordpress-plugins/popup-dialog-box/ "Popup Dialog Box FAQ")
 
 1. Extract `popup-dialog-box.zip` to your `/wp-content/plugins/` directory.
 2. In the admin panel under plugins activate Popup Dialog Box.
@@ -42,6 +48,9 @@ Popup Dialog Box is developed and maintained by [XYZScripts](http://xyzscripts.c
 If you need any further help, you may contact our [support desk](http://xyzscripts.com/support/ "XYZScripts Support").
 
 == Frequently Asked Questions ==
+
+★ [Popup Dialog Box User Guide](http://docs.xyzscripts.com/wordpress-plugins/popup-dialog-box/ "Popup Dialog Box User Guide")
+★ [Popup Dialog Box FAQ](http://kb.xyzscripts.com/wordpress-plugins/popup-dialog-box/ "Popup Dialog Box FAQ")
 
 = 1. What is a "popup dialog box" ? =
 
@@ -91,6 +100,9 @@ More questions ? [Drop a mail](http://xyzscripts.com/support/ "XYZScripts Suppor
 
 
 == More Information ==
+
+★ [Popup Dialog Box User Guide](http://docs.xyzscripts.com/wordpress-plugins/popup-dialog-box/ "Popup Dialog Box User Guide")
+★ [Popup Dialog Box FAQ](http://kb.xyzscripts.com/wordpress-plugins/popup-dialog-box/ "Popup Dialog Box FAQ")
 
 
 = Troubleshooting =
