@@ -1,7 +1,7 @@
 ﻿=== Popup Dialog Box ===
 Contributors: f1logic
 Donate link: http://xyzscripts.com/donate/
-Tags: 
+Tags: dialog box, message box, popup box, popup dialog box, popup message box, poppup box, popup, onclick popup box,  custom message popup, popup message on pages, popup message, popup window, unblockable popup
 Requires at least: 2.8
 Tested up to: 3.6
 Stable tag: 1.0
