@@ -3,7 +3,7 @@
 Plugin Name:Popup Dialog Box
 Plugin URI: http://xyzscripts.com/wordpress-plugins/popup-dialog-box/
 Description: This plugin allows you to create a popup dialog box with custom content in your site. You can customize the dialog box display by configuring various settings such as  position settings (height,width,top,left), display logic settings (time delay after page load, number of pages to browse,  repeat interval) and style settings(z-index, color, border etc). The plugin supports automatic and manual (shortcode) display.
-Version: 1.0
+Version: 1.1
 Author: xyzscripts.com
 Author URI: http://xyzscripts.com/
 License: GPLv2 or later
@@ -45,6 +45,8 @@ require( dirname( __FILE__ ) . '/admin/menu.php' );
 
 require( dirname( __FILE__ ) . '/create-dialogbox.php' );
 
+require( dirname( __FILE__ ) . '/ajax-handler.php' );
+
 require( dirname( __FILE__ ) . '/shortcode-handler.php' );
 
 require( dirname( __FILE__ ) . '/admin/destruction.php' );
@@ -55,9 +57,28 @@ if(get_option('xyz_credit_link')=="dbx"){
 
 }
 function xyz_dbx_credit() {
-	$content = '<div style="clear:both;width:100%;text-align:center; font-size:11px; "><a target="_blank" href="http://xyzscripts.com/wordpress-plugins/popup-dialog-box/details">Popup Dialog Box</a> Powered By : <a target="_blank" title="PHP Scripts & Programs" href="http://www.xyzscripts.com" >XYZScripts.com</a></div>';
+	$content = '<div style="clear:both;width:100%;text-align:center; font-size:11px; "><a target="_blank" href="http://xyzscripts.com/wordpress-plugins/popup-dialog-box/details">Popup Dialog Box</a> Powered By : <a target="_blank" title="PHP Scripts & Wordpress Plugins" href="http://www.xyzscripts.com" >XYZScripts.com</a></div>';
 	echo $content;
 }
+
+
+
+function xyz_dbx_query_vars($vars) {
+	$vars[] = 'xyz_dbx';
+	return $vars;
+}
+add_filter('query_vars', 'xyz_dbx_query_vars');
+
+
+function xyz_dbx_parse_request($wp) {
+	if (array_key_exists('xyz_dbx', $wp->query_vars)
+			&& $wp->query_vars['xyz_dbx'] == 'iframe') {
+		require( dirname( __FILE__ ) . '/iframe.php' );
+		die;
+	}
+
+}
+add_action('parse_request', 'xyz_dbx_parse_request');
 
 
 ?>

@@ -1,12 +1,11 @@
 <?php
 
-if ( is_admin() )
-{
+
 
 	add_action('admin_menu', 'dbx_menu');
 	
 
-}
+
 
 function dbx_menu()
 {
@@ -63,10 +62,14 @@ function dbx_farbtastic_style()
 }
 function xyz_dbx_admin_style()
 {
-	require( dirname( __FILE__ ) . '/style.php' );
+	//require( dirname( __FILE__ ) . '/style.php' );
+	wp_enqueue_script('jquery');
+	wp_register_style('xyz_dbx_style', plugins_url('popup-dialog-box/css/style.css'));
+	wp_enqueue_style('xyz_dbx_style');
+	
 
 }
-	wp_enqueue_script('jquery');
-add_action('admin_print_styles', 'xyz_dbx_admin_style');
+	
+add_action('admin_enqueue_scripts', 'xyz_dbx_admin_style');
 
 ?>

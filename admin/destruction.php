@@ -1,5 +1,24 @@
 <?php
 
+function xyz_dbx_network_destroy($networkwide) {
+	global $wpdb;
+
+	if (function_exists('is_multisite') && is_multisite()) {
+		// check if it is a network activation - if so, run the activation function for each blog id
+		if ($networkwide) {
+			$old_blog = $wpdb->blogid;
+			// Get all blog ids
+			$blogids = $wpdb->get_col("SELECT blog_id FROM $wpdb->blogs");
+			foreach ($blogids as $blog_id) {
+				switch_to_blog($blog_id);
+				dbx_destroy();
+			}
+			switch_to_blog($old_blog);
+			return;
+		}
+	}
+	dbx_destroy();
+}
 
 function dbx_destroy()
 {
@@ -14,6 +33,12 @@ function dbx_destroy()
 	delete_option("xyz_dbx_width");
 	delete_option("xyz_dbx_height");
 	delete_option("xyz_dbx_left");
+	
+	delete_option("xyz_dbx_enable");
+	delete_option("xyz_dbx_showing_option");
+	delete_option("xyz_dbx_adds_enable");
+	delete_option("xyz_dbx_cache_enable");
+	
 	delete_option("xyz_dbx_delay");
 	delete_option("xyz_dbx_page_count");
 	delete_option("xyz_dbx_mode"); //page_count_only,both are other options
@@ -41,7 +66,7 @@ function dbx_destroy()
 
 }
 
-register_uninstall_hook(XYZ_DBX_PLUGIN_FILE,'dbx_destroy');
+register_uninstall_hook(XYZ_DBX_PLUGIN_FILE,'xyz_dbx_network_destroy');
 
 
 ?>

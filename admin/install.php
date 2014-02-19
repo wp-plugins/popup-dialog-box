@@ -1,5 +1,23 @@
 <?php
+function xyz_dbx_network_install($networkwide) {
+	global $wpdb;
 
+	if (function_exists('is_multisite') && is_multisite()) {
+		// check if it is a network activation - if so, run the activation function for each blog id
+		if ($networkwide) {
+			$old_blog = $wpdb->blogid;
+			// Get all blog ids
+			$blogids = $wpdb->get_col("SELECT blog_id FROM $wpdb->blogs");
+			foreach ($blogids as $blog_id) {
+				switch_to_blog($blog_id);
+				dbx_install();
+			}
+			switch_to_blog($old_blog);
+			return;
+		}
+	}
+	dbx_install();
+}
 
 function dbx_install()
 {
@@ -9,6 +27,11 @@ function dbx_install()
 		add_option("xyz_credit_link", '0');
 	}
 	add_option("xyz_dbx_tinymce", '1');
+
+add_option("xyz_dbx_enable", '1');
+add_option('xyz_dbx_showing_option','0,0,0');
+add_option("xyz_dbx_adds_enable", '1');
+add_option("xyz_dbx_cache_enable", '0');
 	add_option("xyz_dbx_html", 'Hello world.');
 	add_option("xyz_dbx_top", '25');
 	add_option("xyz_dbx_width", '500');
@@ -56,7 +79,7 @@ function dbx_install()
 	}
 	
 }
-register_activation_hook(XYZ_DBX_PLUGIN_FILE,'dbx_install');
-
+//register_activation_hook(XYZ_DBX_PLUGIN_FILE,'dbx_install');
+register_activation_hook( XYZ_DBX_PLUGIN_FILE ,'xyz_dbx_network_install');
 
 ?>

@@ -31,7 +31,7 @@ if($xyz_tinymce==1)
 		$xyz_dbx_mode=$_POST['xyz_dbx_mode'];
 		$xyz_dbx_z_index=intval($_POST['xyz_dbx_z_index']);
 		
-	
+		$xyz_dbx_showing_option="0,0,0";
 		
 		 $xyz_dbx_bg_color=$_POST['xyz_dbx_bg_color'];		
 		$xyz_dbx_corner_radius=abs(intval($_POST['xyz_dbx_corner_radius']));
@@ -48,6 +48,28 @@ if($xyz_tinymce==1)
 		$xyz_dbx_positioning=$_POST['xyz_dbx_positioning'];
 		$xyz_dbx_position_predefined=$_POST['xyz_dbx_position_predefined'];
 		
+		
+		
+		
+		if($xyz_dbx_page_option==2)
+		{
+			$dbx_pgf=0;
+			$dbx_pof=0;
+			$dbx_hp=0;
+			if(isset($_POST['xyz_dbx_pages']))
+				$dbx_pgf=1;
+			if(isset($_POST['xyz_dbx_posts']))
+				$dbx_pof=1;
+			if(isset($_POST['xyz_dbx_hp']))
+				$dbx_hp=1;
+		
+			$xyz_dbx_showing_option=$dbx_pgf.",".$dbx_pof.",".$dbx_hp;
+		
+			update_option('xyz_dbx_showing_option',$xyz_dbx_showing_option);
+		
+		
+		
+	 }
 		
 		
 $old_page_count=get_option('xyz_dbx_page_count');
@@ -84,7 +106,7 @@ if(isset($_POST['xyz_dbx_cookie_resett']))
 		update_option('xyz_dbx_mode',$xyz_dbx_mode);
 		update_option('xyz_dbx_z_index',$xyz_dbx_z_index);
 		
-		update_option('xyz_dbx_color',$xyz_dbx_color);
+		//update_option('xyz_dbx_color',$xyz_dbx_color);
 		update_option('xyz_dbx_corner_radius',$xyz_dbx_corner_radius);
 		update_option('xyz_dbx_top_dim',$xyz_dbx_top_dim);
 		update_option('xyz_dbx_height_dim',$xyz_dbx_height_dim);	
@@ -145,16 +167,21 @@ cursor:default;
 v=document.getElementById('xyz_dbx_page_option').value;
 if(v==1)
 {
-	document.getElementById('automatic').style.display='';
-
+	document.getElementById('automatic').style.display='block';
+	document.getElementById('shopt').style.display='none';
 	document.getElementById('shortcode').style.display='none';		
 }
-
+if(v==2)
+{
+	document.getElementById('shopt').style.display='block';
+	document.getElementById('shortcode').style.display='none';
+	document.getElementById('automatic').style.display='none';	
+}
 if(v==3)
 
 {
-	document.getElementById('shortcode').style.display='';	
-	
+	document.getElementById('shortcode').style.display='block';
+	document.getElementById('shopt').style.display='none';
 	document.getElementById('automatic').style.display='none';
 }
   }
@@ -278,6 +305,10 @@ $xyz_dbx_position_predefined=get_option('xyz_dbx_position_predefined');
 <h2>Dialogbox  Settings</h2>
 <form method="post" >
 
+<?php 
+$xyz_dbx_showing_option=get_option('xyz_dbx_showing_option');
+$xyz_dbx_sh_arr=explode(",", $xyz_dbx_showing_option);
+?>
 <table  class="widefat" style="width:98%">
 <tr valign="top" >
 <td  scope="row" style="width: 50%" ><h3>  Title</h3></td>
@@ -539,15 +570,32 @@ $xyz_dbx_repeat_interval_timing=get_option('xyz_dbx_repeat_interval_timing');
 <td>
 <select name="xyz_dbx_page_option" id="xyz_dbx_page_option" onchange="bgchange()">
 <option value ="1" <?php if($xyz_dbx_page_option=='1') echo 'selected'; ?> >Automatic </option>
-
+<option value ="2" <?php if($xyz_dbx_page_option=='2') echo 'selected'; ?> >Specific Pages</option>
 <option value ="3" <?php if($xyz_dbx_page_option=='3') echo 'selected'; ?> >Manual </option>
 </select></td></tr>
-<tr valign="top" id="automatic"  style="display: none"><td scope="row" ></td><td >(Popup will load in all pages)</td>
+
+
+
+<tr valign="top" ><td scope="row" ></td><td>
+<span  id="automatic" >Popup will load in all pages</span>
+<span  id="shopt" >
+<input name="xyz_dbx_pages" value="<?php echo $xyz_dbx_sh_arr[0];?>"<?php if($xyz_dbx_sh_arr[0]==1){?> checked="checked"<?php } ?> type="checkbox"> On Pages 
+<input name="xyz_dbx_posts" value="<?php echo $xyz_dbx_sh_arr[1];?>"<?php if($xyz_dbx_sh_arr[1]==1){?> checked="checked"<?php }?>  type="checkbox"> On Posts
+<input name="xyz_dbx_hp" value="<?php echo $xyz_dbx_sh_arr[2];?>"<?php if($xyz_dbx_sh_arr[2]==1){?> checked="checked"<?php }?>  type="checkbox"> On Home page 
+</span>
+<span  id="shortcode" >Use this short code in your pages - [xyz_dbx_default_code]</span>
+</td>
+</tr>
+
+
+
+
+<!--  <tr valign="top" id="automatic"  style="display: none"><td scope="row" ></td><td >(Popup will load in all pages)</td>
 
 </tr>
 
 <tr valign="top" id="shortcode"  style="display: none"><td scope="row"></td><td>Use this short code in your pages - [xyz_dbx_default_code]</td>
-</tr>
+</tr>-->
 
 
 <tr valign="top">

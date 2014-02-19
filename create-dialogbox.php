@@ -1,21 +1,92 @@
 <?php
-
-add_action ( 'get_footer', 'dbx_lightbox_create');//, [priority], [accepted_args] );
-
-wp_enqueue_script('jquery');
-function dbx_lightbox_create()
+$xyz_dbx_cache_enable=get_option('xyz_dbx_cache_enable');
+if($xyz_dbx_cache_enable==1)
+{	
+    add_action ( 'get_footer', 'xyz_dbx_container');//, [priority], [accepted_args] );
+}
+else 
 {
+	add_action ( 'get_footer', 'xyz_dbx_action_callback');
+}	
+
+function xyz_dbx_container()
+{
+	
+	echo "<span id='xyz_dbx_container'></span>";
+}
+
+	add_action( 'wp', 'xyz_dbx_create' );
+
+function xyz_dbx_create()
+{
+	global $xyz_dbx_cache_enable;
+	
+	$ispage=is_page()?1:0;
+	$ispost=is_single()?1:0;
+	$ishome=is_home()?1:0;
+	
+	wp_enqueue_script('jquery');
+	
+	if($xyz_dbx_cache_enable==1)
+	{
+	wp_enqueue_script( 'xyz_dbx_ajax_script', plugins_url( 'dbx_request.js', __FILE__ ), array('jquery') );
+	wp_localize_script( 'xyz_dbx_ajax_script', 'xyz_dbx_ajax_object', array( 'ajax_url' => admin_url( 'admin-ajax.php' ),'ispage'=>$ispage,'ispost'=>$ispost,'ishome'=>$ishome) );
+
+	}
+}	
+add_action( 'wp_ajax_xyz_dbx_action', 'xyz_dbx_action_callback' );
+add_action( 'wp_ajax_nopriv_xyz_dbx_action', 'xyz_dbx_action_callback' );
+	
+function xyz_dbx_action_callback()
+{	
+	global $xyz_dbx_cache_enable;
+	
 	$page_option=get_option('xyz_dbx_page_option');
+	$xyz_dbx_enable=get_option('xyz_dbx_enable');
+	$xyz_dbx_showing_option=get_option('xyz_dbx_showing_option');
+	
+	if($page_option==2)
+	{
+		if($xyz_dbx_cache_enable==1)
+		{
+		$page=$_POST['xyz_dbx_pg'];
+		$post=$_POST['xyz_dbx_ps'];
+		$home=$_POST['xyz_dbx_hm'];
+		}
+		else 
+		{
+			$page=is_page()?1:0;
+			$post=is_single()?1:0;
+			$home=is_home()?1:0;
+		}	
+	  $xyz_dbx_sh_arr=explode(",", $xyz_dbx_showing_option);
+		if (!(($xyz_dbx_sh_arr[0]==1 && $page==1) || ($xyz_dbx_sh_arr[1]==1 && $post==1 ) || ($xyz_dbx_sh_arr[2]==1 && $home==1 )))
+			return;
+	}
 	
 	if($page_option==3)
 	{
-
-		return false;
+		if($xyz_dbx_cache_enable==1)
+		{
+		$shortcode=$_POST['xyz_dbx_shortcd'];
+		if($shortcode!=1)
+			return;
+		}
+		else 
+			return;
 	}
-	echo dbx_lightbox_display();
+	
+   if($xyz_dbx_enable==1)
+   
+	  echo xyz_dbx_display();
+   if($xyz_dbx_cache_enable==1)
+   {
+      die();
+   }   
+   
 }
 
-function dbx_lightbox_display()
+function xyz_dbx_display()
 {
 	$imgpath=plugins_url()."/popup-dialog-box/images/";
 	$closeimage=$imgpath."close.png";
@@ -71,7 +142,7 @@ display: none;
 position: fixed;
 _position: fixed;
   
-<?php  if($positioning==1){if($position_option==1){?>
+<?php  if($positioning==1){if($position_option==1){?>;
 top: <?php echo $top; echo $top_dim;?>;
 left: <?php echo $left; echo $left_dim;?>;
 <?php }?>
@@ -109,6 +180,7 @@ border:0;
 .dbx{
 background-color: <?php echo $border_color;?>;
 color: <?php echo $dbx_title_color?>;
+padding:4px 0px;
 }
 #closediv{
 position:absolute;
@@ -122,7 +194,7 @@ right: 0px;
 <div id="dbx_light" class="dbx_content"><?php if(!isset($_COOKIE['_xyz_dbx_until'])) {?>
 <div class="dbx"><?php echo $dbx_title;  if($close_button_option==1) {?><img id="closediv"   src="<?php  echo $dbcloseimage;?>" onclick = "javascript:dbx_hide_lightbox()"><?php }?></div>
 <!-- <div width="100%" height="20px" style="text-align:right;padding:0px;margin:0px;"><a href = "javascript:void(0)" onclick = "javascript:dbx_hide_lightbox()">CLOSE</a></div> -->
-<?php if($iframe_option==1) { ?><iframe  src="<?php echo  plugins_url();?>/popup-dialog-box/iframe.php" class="dbx_iframe" scrolling="no"></iframe><?php }else{  
+<?php if($iframe_option==1) { ?><iframe  src="<?php echo  get_bloginfo('wpurl') ;?>/index.php?xyz_dbx=iframe" class="dbx_iframe" scrolling="no"></iframe><?php }else{  
 echo do_shortcode($html);}
 }?>
 </div>
@@ -136,9 +208,11 @@ var dbxwid=<?php echo $width; ?>;
 var dbxwiddim="<?php echo $width_dim;?>";
 var dbxhe=<?php echo $height; ?>;
 var dbxhedim="<?php echo $height_dim;?>";
-
+var dbxbordwidth=<?php echo $border_width;?>;
 var screenheight=jQuery(window).height(); 
 var screenwidth=jQuery(window).width(); 
+
+
 if(dbxhedim=="px")
 
 {
@@ -161,6 +235,10 @@ else
 {
 	wiadjust=(100-dbxwid)/2;
 }
+
+
+
+
 
 if(posit==2)
 

@@ -3,8 +3,8 @@ Contributors: f1logic
 Donate link: http://xyzscripts.com/donate/
 Tags: dialog box, message box, popup box, popup dialog box, popup message box, popup box, popup, onclick popup box,  custom message popup, popup message on pages, popup message, popup window, unblockable popup
 Requires at least: 2.8
-Tested up to: 3.6
-Stable tag: 1.0
+Tested up to: 3.8.1
+Stable tag: 1.1
 License: GPLv2 or later
 
 Create a javascript based, light-weight and non-annoying  popup dialog box in your blog.
@@ -20,6 +20,7 @@ A quicklook into Popup Dialog Box
     ★ Display based on browsed number of pages
     ★ Css settings like color, z-index, border etc
     ★ Shortcode for displaying popup dialog box in specific pages
+    ★ Display specificaly in pages/posts/home page
 
 This plugin allows you to create a  popup dialog box  with custom content in your site. You can customize the popup display by configuring various settings such as  position settings (height, width, top, left), display logic settings (trigger based on timeout after page load, based on number of pages browsed, popup repeat interval) and style settings(z-index, color, border etc). The plugin supports automatic and manual (shortcode) display. You can use the plugin to display any type of contents such as special promotions, subscription forms, social media icons, feedback forms, video presentations and much more.
 
@@ -75,11 +76,15 @@ You may  use the popup to display any type of contents such as special promotion
 
 Yes, you can do this by using the shortcode provided from settings page.
 
-= 7. Can I create multiple popup boxes for different pages ? =
+= 7. Does it work with caching plugins ? =
+
+You can turn on compatibility with cache plugins from settings page. Please  note that since this method uses ajax, the popup will be a rendered a bit slower than in normal mode.
+
+= 8. Can I create multiple popup boxes for different pages ? =
 
 You need to purchase the premium version for having this feature.
 
-= 8. Where can i get the premium version ? =
+= 9. Where can i get the premium version ? =
 
 The premium version can be purchased from our site [xyzscripts.com](http://xyzscripts.com/wordpress-plugins/xyz-wp-popup/ "XYZ WP Popup").
 
@@ -91,6 +96,13 @@ More questions ? [Drop a mail](http://xyzscripts.com/support/ "XYZScripts Suppor
 1. Sample popup dialog box. 
 
 == Changelog ==
+
+= 1.1 =
+* Display specifically in pages/posts/home page.
+* Enable/disable premium version ads.
+* Option to enable/disable popup.
+* Compatibility with cache plugins.
+* Network installation support.
 
 = 1.0 =
 * First official launch.
