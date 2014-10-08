@@ -3,7 +3,7 @@ Contributors: f1logic
 Donate link: http://xyzscripts.com/donate/
 Tags: dialog box, message box, popup box, popup dialog box, popup message box, popup box, popup, onclick popup box,  custom message popup, popup message on pages, popup message, popup window, unblockable popup
 Requires at least: 2.8
-Tested up to: 3.8.1
+Tested up to: 4.0
 Stable tag: 1.1
 License: GPLv2 or later
 
