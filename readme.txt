@@ -3,8 +3,8 @@ Contributors: f1logic
 Donate link: http://xyzscripts.com/donate/
 Tags: dialog box, message box, popup box, popup dialog box, popup message box, popup box, popup, onclick popup box,  custom message popup, popup message on pages, popup message, popup window, unblockable popup
 Requires at least: 2.8
-Tested up to: 4.0
-Stable tag: 1.1
+Tested up to: 4.2.2
+Stable tag: 1.2
 License: GPLv2 or later
 
 Create a javascript based, light-weight and non-annoying  popup dialog box in your blog.
@@ -96,6 +96,10 @@ More questions ? [Drop a mail](http://xyzscripts.com/support/ "XYZScripts Suppor
 1. Sample popup dialog box. 
 
 == Changelog ==
+
+= 1.2 =
+* Responsive popup dialog box
+* Fixed a few bugs
 
 = 1.1 =
 * Display specifically in pages/posts/home page.

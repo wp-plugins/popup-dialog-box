@@ -15,7 +15,7 @@ $xyz_dbx_cache_enable=get_option('xyz_dbx_cache_enable');
 
 <tr valign="top" id="xyz_dbx">
 
-<td scope="row" colspan="1" width="50%"><label for="xyz_tinymce">Enable tiny MCE filter to prevent auto removal of &lt br &gt and &lt p &gt tags ?</label>	</td>
+<td scope="row" colspan="1" width="50%"><label for="xyz_dbx_tinymce">Enable tiny MCE filter to prevent auto removal of &lt br &gt and &lt p &gt tags ?</label>	</td>
 
 <td><select name="xyz_dbx_tinymce" id="xyz_dbx_tinymce" >
 
@@ -29,7 +29,7 @@ $xyz_dbx_cache_enable=get_option('xyz_dbx_cache_enable');
 
 <tr valign="top" id="xyz_dbx">
 
-<td scope="row" colspan="1"><label for="xyz_credit_link">Enable credit link to author ?</label>	</td><td><select name="xyz_credit_link" id="xyz_dbx_credit_link" >
+<td scope="row" colspan="1"><label for="xyz_dbx_credit_link">Enable credit link to author ?</label>	</td><td><select name="xyz_credit_link" id="xyz_dbx_credit_link" >
 
 <option value ="dbx" <?php if($xyz_credit_link=='dbx') echo 'selected'; ?> >Yes </option>
 

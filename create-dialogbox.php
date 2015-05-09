@@ -132,10 +132,12 @@ $position_predefined=get_option('xyz_dbx_position_predefined');
 $referar_message_show_option=get_option('xyz_dbx_referar_message_show_option');
 global $wpdb;
 
-ob_flush();
+$tmp=ob_get_contents();
+ob_clean();
 ob_start();
-	?>
-	<style type="text/css">
+	
+?>
+<style type="text/css">
 
 .dbx_content {
 display: none;
@@ -166,7 +168,11 @@ border: <?php echo $border_width; ?>px solid <?php echo $border_color;?>;
 background-color: <?php echo $bg_color;?>;
 z-index:<?php echo $z_index+1;?>;
 overflow: hidden;
-border-radius:<?php echo $corner_radius;?>px
+border-radius:<?php echo $corner_radius;?>px;
+
+box-sizing: content-box;
+-moz-box-sizing: content-box;
+-webkit-box-sizing: content-box;
 
 }
 .dbx_iframe{
@@ -200,6 +206,8 @@ echo do_shortcode($html);}
 </div>
 
 <script type="text/javascript">
+function xyz_dbx_settings()
+{
 var hadjust;
 var wiadjust;
 var posit=<?php echo $positioning;?> 
@@ -209,7 +217,8 @@ var dbxwiddim="<?php echo $width_dim;?>";
 var dbxhe=<?php echo $height; ?>;
 var dbxhedim="<?php echo $height_dim;?>";
 var dbxbordwidth=<?php echo $border_width;?>;
-var screenheight=jQuery(window).height(); 
+var screenheight=jQuery(window).height();
+/*var screenheight=window.innerHeight;*/
 var screenwidth=jQuery(window).width(); 
 
 
@@ -301,6 +310,10 @@ var bordwidth=<?php echo $border_width;?>;
 	
 		var hadnjust=(screenheight*dbxhe)/100;
 		 newheight=hadnjust-(2*bordwidth);
+
+		 if(newheight<0)
+			 newheight=0;
+		 
 		 document.getElementById("dbx_light").style.height=newheight+'px';
 	}
 	
@@ -311,11 +324,15 @@ var bordwidth=<?php echo $border_width;?>;
 		
 		var wiadnjust=(screenwidth*dbxwid)/100;
 		 newwidth=wiadnjust-(2*bordwidth);
+		 
+		 if(newwidth<0)
+			 newwidth=0;
+		 
 			document.getElementById("dbx_light").style.width=newwidth+'px';
 	}
 
 	
-	
+}	
 
 
 
@@ -360,7 +377,12 @@ document.getElementById("dbx_light").innerHTML="";
 function dbx_show_lightbox()
 {
 
-//alert(dbx_tracking_cookie_val);
+	xyz_dbx_settings();
+	
+	jQuery(window).resize(function(){
+		xyz_dbx_settings();
+
+ });
 
 if(xyz_dbx_tracking_cookie_val==1)
 return;
@@ -396,9 +418,12 @@ setTimeout("dbx_show_lightbox()",<?php echo $delay*1000;?>);
 
 
 <?php 
-$lbc=ob_get_contents();
+
+
+$lbc = ob_get_contents();
 ob_clean();
-return  $lbc;
+echo $tmp;
+return $lbc;
 
 }
 

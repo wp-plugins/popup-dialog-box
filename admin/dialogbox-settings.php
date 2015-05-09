@@ -7,6 +7,7 @@ if($xyz_tinymce==1)
 }
 	if (isset($_POST['xyz_dbx_html']))
 	{
+		$_POST=stripslashes_deep($_POST);
 		$xyz_dbx_iframe=$_POST['xyz_dbx_iframe'];
 		$xyz_dbx_repeat_interval_timing=$_POST['xyz_dbx_repeat_interval_timing'];
 		$xyz_dbx_html=stripslashes($_POST['xyz_dbx_html']);
@@ -489,7 +490,7 @@ $xyz_dbx_repeat_interval_timing=get_option('xyz_dbx_repeat_interval_timing');
 <td scope="row" colspan="1"><label for="lbx_display_trigger"> Display trigger</label></td><td style="color: red; ">Available in premium version only </td></tr>
 				<tr valign="top" id="xyz_dbx_close">
 
-<td scope="row" colspan="1"><label for="xyz_dbx_bgimage_option"> Close button option </label></td><td>
+<td scope="row" colspan="1"><label for="xyz_dbx_close_button_option"> Close button option </label></td><td>
 
 
 <select name="xyz_dbx_close_button_option" id="xyz_dbx_close_button_option"  >
@@ -503,7 +504,7 @@ $xyz_dbx_repeat_interval_timing=get_option('xyz_dbx_repeat_interval_timing');
 </tr>
 <tr valign="top">
 
-<td scope="row" colspan="1"><label for="xyz_dbx_bgimage_option">Display as iframe </label></td><td>
+<td scope="row" colspan="1"><label for="xyz_dbx_iframe">Display as iframe </label></td><td>
 
 
 <select name="xyz_dbx_iframe" id="xyz_dbx_iframe"  >

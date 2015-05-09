@@ -3,7 +3,7 @@
 Plugin Name:Popup Dialog Box
 Plugin URI: http://xyzscripts.com/wordpress-plugins/popup-dialog-box/
 Description: This plugin allows you to create a popup dialog box with custom content in your site. You can customize the dialog box display by configuring various settings such as  position settings (height,width,top,left), display logic settings (time delay after page load, number of pages to browse,  repeat interval) and style settings(z-index, color, border etc). The plugin supports automatic and manual (shortcode) display.
-Version: 1.1
+Version: 1.2
 Author: xyzscripts.com
 Author URI: http://xyzscripts.com/
 License: GPLv2 or later
